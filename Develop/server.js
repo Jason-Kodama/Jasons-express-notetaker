@@ -15,7 +15,9 @@ app.get('/notes', (req, res) =>
 res.sendFile(path.join(__dirname, 'public/notes.html'))
 );
 
-
+app.post('/notes', (req, res) => {
+    console.info(`${req.method} request received`)
+})
 app.listen(PORT, () =>
     console.log(`app listening at http://localhost:${PORT}`)
 );

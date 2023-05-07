@@ -27,7 +27,7 @@ const hide = (elem) => {
 let activeNote = {};
 
 const getNotes = () =>
-  fetch('/api/notes', {
+  fetch('/notes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -35,14 +35,21 @@ const getNotes = () =>
   });
 
 const saveNote = (note) =>
-  fetch('/api/notes', {
+  fetch('/notes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  });
-
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('Successful POST request', data);
+      return data;
+    })
+    .catch((error) => {
+      console.error('Error in POST request:', error);
+    });
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
